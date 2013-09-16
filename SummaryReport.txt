@@ -1,0 +1,21 @@
+Names: Steven Lee, Kaitlin Decker
+CS IDs: scl346, kad869
+
+Instructions for running agent: Add agent to the configuration file by changing the AStarSearchAgent
+to IdaStarSearchAgent (as indicated in the homework guidelines). Open OpenNERO, start the Maze Mod,
+and run A*Search to run the agent. Note: for complicated mazes, the MAX_STEPS may need to be raised
+or else the agent will reset after reaching that number of steps.
+
+Our agent begins with the implementation of A* search and adds iterative deepening to that implementation.
+A* works by calculating the heuristic for any available moves, and choosing the smallest heuristic for the next move.
+We altered the original manhattan_heuristic to incorporate the distance traveled (represented by the depth
+variable) along with the distance to the final goal. A depth dictionary is used to keep track of the distance 
+needed to get to a particular point. For each location the agent visits, the depth is calculated as the previous 
+point's depth (called from the dictionary) + 1. Therefore, calculating the heuristic involves getting the depth
+of a point from the depth dictionary. Because the shortest possible path to the final goal takes exactly (row + 
+col) steps, we set that as our initial limit for iterative deepening. If the agent is unable to reach that final 
+goal in the number of steps respresented by limit variable, the limit is increased by 1 and the agent is reset
+to the beginning to search through again. The next move to make is determined by the priority queue, which consists
+of all the possible moves, in order of their heuristic values. The point with the smallest heuristic value is
+dequeued and the agent proceeds to move towards that subgoal. Any new point visited adds new possible points to
+this same priority queue. 
